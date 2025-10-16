@@ -100,6 +100,11 @@ input[type="submit"] {
     transition: .2s;
 }
 
+input[type="submit"]:hover {
+    background-color: #797979;
+    cursor: pointer;
+}
+
 table {
 
     width: auto;
