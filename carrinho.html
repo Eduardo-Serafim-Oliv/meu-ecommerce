@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Papelaria - Carrinho</title>
+    <link rel="shortcut icon" href="img/ifg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="img/ifg-horizontal.svg" alt="logo do IFG" width="300">
+        </a>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="carrinho">
+        <div id="itens-carrinho">
+            <div class="item-carrinho">
+                <img src="img/produtos/imagem_caderno.jpeg" alt="produto" width="100" height="100">
+                <span class="nome">Caderno</span>
+                <span class="preco">R$ 20,00</span>
+                <input type="number" min="1" max="99" step="1" value="3">
+            </div>
+            <div class="item-carrinho">
+                <img src="img/produtos/imagem_cola.jpeg" alt="produto" width="100" height="100">
+                <span class="nome">Cola Branca</span>
+                <span class="preco">R$ 5,00</span>
+                <input type="number" min="1" max="99" step="1" value="1">
+            </div>
+            <div class="item-carrinho">
+                <img src="img/produtos/imagem_compasso.jpeg" alt="produto" width="100" height="100">
+                <span class="nome">Compasso</span>
+                <span class="preco">R$ 15,00</span>
+                <input type="number" min="1" max="99" step="1" value="2">
+            </div>
+        </div>
+        <div id="div-finalizar-compra">
+            <p>Resumo do Pedido</p>
+            <p>Total (6 produtos):</p>
+            <span>R$ 95,00</span>
+            <p class="texto-sem-destaque">Em até 10x s/juros</p>
+            <p class="texto-sem-destaque">10x de 9,50</p>
+            <br><br>
+            <a href="sucesso-pedido.html">Finalizar Pedido</a>
+        </div>
+    </div>
+</body>
+</html>
