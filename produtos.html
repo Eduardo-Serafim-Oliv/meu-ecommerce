@@ -1,36 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papelaria</title>
     <link rel="shortcut icon" href="img/ifg.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <header>
-        <a href="index.html">
-            <img src="img/ifg-horizontal.png" alt="logo do IFG" width="300">
-        </a>
-        <nav>
-            <ul id="nav-links">
-                <li><a href="produtos.html">Produtos</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="carrinho.html">Carrinho</a></li>
-            </ul>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="img/ifg.ico" alt="logo do IFG" width="50" height="60">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav w-100 justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="produtos.html">Produtos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contato.html">Contato</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="carrinho.html">Carrinho</a>
+                        </li>
+                        <li class="nav-item dropdown navbar-menu">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="img/user.png" alt="Ícone de usuário">
+                                Olá, Pessoa
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="novo_usuario.html">Cadastrar</a></li>
+                                <li><a class="dropdown-item" href="login.html">Entrar</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="meus_dados.html">Meus Dados</a></li>
+                                <li><a class="dropdown-item" href="meus_pedidos.html">Meus Pedidos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </header>
     <main>
 
-        <div class="container">
-
+        <div class="container mt-5">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_caderno.jpeg" class="card-img-top" alt="Imagem do Caderno">
+                        <img src="img/produtos/imagem_caderno.png" class="card-img-top" alt="Imagem do Caderno">
                         <div class="card-body">
                             <h5 class="card-title">Carderno</h5>
                             <p class="card-text">Caderno Universitário 1 Matéria 80 Folhas Zip Preto Tilibra.</p>
@@ -46,7 +81,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_mochila.jpeg" class="card-img-top" alt="Imagem Mochila">
+                        <img src="img/produtos/imagem_mochila.png" class="card-img-top" alt="Imagem Mochila">
                         <div class="card-body">
                             <h5 class="card-title">Mochila</h5>
                             <p class="card-text">Mochila Masculina Royal Style 3509 PRETO</p>
@@ -62,7 +97,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_estojo_escolar.jpg" class="card-img-top" alt="Imagem do Estojo">
+                        <img src="img/produtos/imagem_estojo_escolar.png" class="card-img-top" alt="Imagem do Estojo">
                         <div class="card-body">
                             <h5 class="card-title">Estojo</h5>
                             <p class="card-text">Estojo azul confeccionado em poliéster com puxadores personalizados e
@@ -81,8 +116,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_calculadora.jpeg" class="card-img-top"
-                            alt="Imagem da Calculadora">
+                        <img src="img/produtos/imagem_calculadora.png" class="card-img-top" alt="Imagem da Calculadora">
                         <div class="card-body">
                             <h5 class="card-title">Calculadora</h5>
                             <p class="card-text">Calculadora Eletrônica de Mesa 8 Dígitos, 1 Pilha AAA (Não Inclusa),
@@ -101,7 +135,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_cola.jpeg" class="card-img-top" alt="Imagem da Cola">
+                        <img src="img/produtos/imagem_cola.png" class="card-img-top" alt="Imagem da Cola">
                         <div class="card-body">
                             <h5 class="card-title">Cola Branca</h5>
                             <p class="card-text">Cola branca Pritt Tenaz 110g- Henkel.</p>
@@ -119,7 +153,7 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_compasso.jpeg" class="card-img-top" alt="Imagem do Compasso">
+                        <img src="img/produtos/imagem_compasso.png" class="card-img-top" alt="Imagem do Compasso">
                         <div class="card-body">
                             <h5 class="card-title">Compasso</h5>
                             <p class="card-text">Compasso metálico com lápis- Cis.</p>
@@ -159,7 +193,8 @@
                         <img src="img/produtos/imagem_chamex.png" class="card-img-top" alt="Imagem da Caixa de Lápis">
                         <div class="card-body">
                             <h5 class="card-title">Papel Chamex A4</h5>
-                            <p class="card-text"> Papel Chamex A4 Laser 75g Pacote 500 folhas. Papel de alta qualidade, ideal para anotações, relatórios e impressões simples.</p>
+                            <p class="card-text"> Papel Chamex A4 Laser 75g Pacote 500 folhas. Papel de alta qualidade,
+                                ideal para anotações, relatórios e impressões simples.</p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">R$ 34,50</li>
@@ -174,10 +209,12 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_tranferidor.png" class="card-img-top" alt="Imagem da Caixa de Lápis">
+                        <img src="img/produtos/imagem_tranferidor.png" class="card-img-top"
+                            alt="Imagem da Caixa de Lápis">
                         <div class="card-body">
                             <h5 class="card-title">Transferidor 360 Graus</h5>
-                            <p class="card-text">Transferidor com grau de circunferência de 360° para medições precisas.</p>
+                            <p class="card-text">Transferidor com grau de circunferência de 360° para medições precisas.
+                            </p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">R$ 6,00</li>
@@ -192,7 +229,8 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_canetas_bic.png" class="card-img-top" alt="Imagem da Caixa de Lápis">
+                        <img src="img/produtos/imagem_canetas_bic.png" class="card-img-top"
+                            alt="Imagem da Caixa de Lápis">
                         <div class="card-body">
                             <h5 class="card-title">Canetas Esferográficas BIC</h5>
                             <p class="card-text">BIC, Caneta Esferográfica Escrita Média, Cristal Dura+, 4 Cores</p>
@@ -228,10 +266,12 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="img/produtos/imagem_caderno_harry_potter.png" class="card-img-top" alt="Imagem da Caixa de Lápis">
+                        <img src="img/produtos/imagem_caderno_harry_potter.png" class="card-img-top"
+                            alt="Imagem da Caixa de Lápis">
                         <div class="card-body">
                             <h5 class="card-title">Caderno - Harry Potter</h5>
-                            <p class="card-text">CADERNO ESPIRAL UNIVERSITÁRIO – HARRY POTTER EDIÇÃO ESPECIAL - JANDAIA</p>
+                            <p class="card-text">CADERNO ESPIRAL UNIVERSITÁRIO – HARRY POTTER EDIÇÃO ESPECIAL - JANDAIA
+                            </p>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">R$ 39,90</li>
@@ -246,32 +286,29 @@
                 </div>
             </div>
         </div>
-        
+
     </main>
 
-    <footer>
+    <footer
+        class="container-fluid flex-wrap justify-content-between align-items-center py-3 mt-5 border-top border-1 border-black">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <div class="col-md-6 d-flex align-items-center">
+                <span class="mb-3 mb-md-0 fw-semibold">&copy; 2025 Papelarias Cosmos LTDA. <br> <br> Avenida
+                    Branca, 32 <br> Formosa-GO <br>CEP: 7000000 <br>CNPJ: 01.002.0003/0001-00</span>
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
 
-        <p>&copy; 2025 Papelarias Cosmos LTDA.</p>
-        <p>Avenida Branca, 32 <br>Formosa-GO <br>CEP: 7000000 <br>CNPJ: 01.002.0003/0001-00 </p>
-
-        <fieldset>
-
-            <p style="font-size: large;"><b>Nos siga nas redes sociais para acompanhar os novos pordutos:</b></p>
-
-            <a href="https://www.instagram.com/" target="_blank"><img
-                    src="img/logotipos_redes_sociais/imagem_logotipo_instagram.png" alt="Logotipo do Instagram"
-                    width="25px">@CosmosPapelaria</a>
-            <br>
-            <a href="https://www.facebook.com/" target="_blank"><img
-                    src="img/logotipos_redes_sociais/imagem_logotipo_facebook.png" alt="Logotipo do Facebook"
-                    width="25px">Papelaria Cosmos</a>
-            <br>
-            <a href="https://www.youtube.com/" target="_blank"><img
-                    src="img/logotipos_redes_sociais/imagem_logotipo_youtube.png" alt="Logotipo do Youtube"
-                    width="25px">Papelaria Cosmos Oficial</a>
-
-        </fieldset>
+                <li class="ms-3"><a class="text-dark" href="https://www.instagram.com/" target="_blank"><i
+                            class="bi bi-instagram fs-4"></i></a></li>
+                <li class="ms-3"><a class="text-primary" href="https://www.facebook.com/" target="_blank"><i
+                            class="bi bi-facebook fs-4"></i></a></li>
+                <li class="ms-3"><a class="text-danger" href="https://www.youtube.com/" target="_blank"><i
+                            class="bi bi-youtube fs-4"></i></a></li>
+            </ul>
+        </div>
     </footer>
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

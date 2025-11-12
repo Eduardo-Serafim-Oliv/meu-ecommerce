@@ -24,6 +24,10 @@
     --bs-secondary-bg: var(--escuro);
     --bs-tertiary-bg: var(--medio);
 
+    #fundo-banner {
+        background-color: var(--verde-ifg);
+    }
+
     .dropdown-item:active {
         background-color: var(--verde-ifg);
     }
@@ -42,10 +46,6 @@
     }
 }
 
-/* .card {
-    width: 100%;
-} */
-
 .card-img-top {
     height: 135px;
     /* altura fixa menor */
@@ -53,4 +53,7 @@
     /* corta a imagem para caber sem distorcer */
 }
 
-/* 2f9e41 */
+footer {
+    width: 100%;
+    background-color: var(--escuro);
+}
