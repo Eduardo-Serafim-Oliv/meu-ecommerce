@@ -1,5 +1,13 @@
-:root {
-    --bg-color-1: #fff;
-    --bg-color-2: #ccc;
-    --color-destaque: #cd191e;
+
+/* .card {
+    width: 100%;
+} */
+
+.card-img-top {
+    height: 135px;
+    /* altura fixa menor */
+    object-fit: contain;
+    /* corta a imagem para caber sem distorcer */
 }
+
+/* 2f9e41 */
