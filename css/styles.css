@@ -23,6 +23,10 @@
     --bs-secondary-bg: var(--escuro);
     --bs-tertiary-bg: var(--medio);
 
+    #fundo-banner {
+        background-color: var(--verde-ifg);
+    }
+
     .dropdown-item:active {
         background-color: var(--verde-ifg);
     }
@@ -62,5 +66,18 @@
     .card.endereco {
         box-shadow: 1px 1px 5px 0rem rgba(66, 66, 66, 0.5);
         background-color: var(--claro);
+    }
+
+    .card-img-top {
+        height: 135px;
+        /* altura fixa menor */
+        object-fit: contain;
+        /* corta a imagem para caber sem distorcer */
+    }
+
+    footer {
+        width: 100%;
+        background-color: var(--escuro);
+
     }
 }
