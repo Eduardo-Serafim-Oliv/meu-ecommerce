@@ -81,3 +81,57 @@
 
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --escuro: hsl(130, 100%, 16%);
+        --medio: hsl(130, 96%, 20%);
+        --claro: hsl(130, 92%, 5%);
+
+        --cor-texto: #cccccc;
+        --verde-ifg: #2f9e41;
+    }
+
+    .nav-link {
+        color: var(--cor-texto);
+    }
+
+    .nav-link.active {
+        color: white !important;
+    }
+
+    .nav-link:hover {
+        color: white;
+    }
+
+    .nav-tabs {
+        border-bottom: 0;
+    }
+
+    #meus-dados,
+    #enderecos {
+        color: var(--cor-texto);
+        background-color: hsl(120, 100%, 13%);
+    }
+
+    #meus-dados.active,
+    #enderecos.active {
+        background-color: var(--medio);
+    }
+
+    .form-floating label {
+        color: var(--cor-texto);
+    }
+
+    .form-control {
+        border-color: transparent;
+    }
+
+    input[type=number] {
+        color: var(--cor-texto);
+        background-color: var(--claro);
+        border-radius: 5px;
+        border: 0px;
+        padding: 5px;
+    }
+}
