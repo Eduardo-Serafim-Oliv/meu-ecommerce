@@ -62,43 +62,48 @@
 
     <main class="min-vh-100">
 
-        <h1 style="text-align: center;">Formulário de Contato</h1>
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-12">
+                    <div class="display-4 text-center mb-2">Formulário de Contato</div>
+                    <form class="card p-5" action="produtos.html">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nome" placeholder="seu@email.com">
+                            <label for="nome">Nome Completo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="seu@email.com">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                                placeholder="(99)99999-99999"
+                                title="Digite no formato (99) 99999-9999, não se esqueça dos espaços e do hífen.">
+                            <label for="telefone">Telefone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option value="1">Encomendas</option>
+                                <option value="2">Reclamações</option>
+                                <option value="3">Devoluções</option>
+                                <option value="4">Outros</option>
+                            </select>
+                            <label for="floatingSelect">Assunto:</label>
+                        </div>
 
-        <center>
+                        Mensagem:
+                        <div class="form-floating mb-3 mt-1">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Digite aqui: </label>
+                        </div>
 
-            <form method="post" action="sucesso-contato.html">
-
-                <label>Nome:</label>
-                <input type="text" id="nome" name="nome" required>
-                <br>
-                <label>Email:</label>
-                <input type="email" id="email" name="email" required>
-                <br>
-                <label>Telefone:</label>
-                <input type="text" id="telefone" name="telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
-                    placeholder="(99)99999-99999"
-                    title="Digite no formato (99) 99999-9999, não se esqueça dos espaços e do hífen.">
-                <br>
-                <label>Assunto:</label>
-                <select>
-
-                    <option>Encomendas</option>
-                    <option>Devoluções</option>
-                    <option>Reclamações</option>
-                    <option>Outros</option>
-
-                </select>
-                <br><br>
-
-
-                <label>Mensagem:</label>
-                <textarea name="mensagem" id="mensagem" rows="4" cols="80" placeholder="Digite aqui: "></textarea>
-                <br>
-
-                <input type="submit" value="Enviar">
-        </center>
-
-        </form>
+                        <button type="submit" class="btn btn-success"
+                            onclick=" alert('Formulário enviado com sucesso!')">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </main>
 
