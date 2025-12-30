@@ -1,11 +1,5 @@
 :root {
-    --escuro: hsl(130, 54%, 70%);
-    --medio: hsl(130, 54%, 80%);
-    --claro: hsl(130, 54%, 90%);
-
-    --cor-texto: #252525;
     --verde-ifg: #2f9e41;
-
     scrollbar-width: none;
 }
 
@@ -26,80 +20,87 @@
 }
 
 [data-bs-theme="light"] {
+    --escuro: hsl(130, 54%, 70%);
+    --medio: hsl(130, 54%, 80%);
+    --claro: hsl(130, 54%, 90%);
+
+    --cor-texto: #252525;
 
     --bs-body-color: var(--cor-texto);
     --bs-body-bg: var(--claro);
     --bs-secondary-bg: var(--escuro);
     --bs-tertiary-bg: var(--medio);
-
-    #fundo-banner {
-        background-color: var(--verde-ifg);
-    }
-
-    .dropdown-item:active {
-        background-color: var(--verde-ifg);
-    }
-
-    .navbar {
-        background-color: var(--escuro) !important;
-        box-shadow: 0 0 5px 0.25rem rgba(66, 66, 66, 0.5);
-    }
-
-    .card {
-        background-color: var(--medio);
-        box-shadow: 2px 3px 6px 0.1rem rgba(66, 66, 66, 0.5);
-    }
-
-    .form-control:focus, .form-select:focus {
-        box-shadow: 0 0 0 0.25rem var(--escuro);
-        border-color: var(--verde-ifg);
-    }
-
-    .nav-link.dados {
-        color: var(--cor-texto);
-        background-color: hsl(130, 54%, 85%);
-        position: relative;
-        z-index: 100;
-        border: 0;
-    }
-
-    .nav-link.dados.active {
-        background-color: var(--medio);
-        border-color: rgba(66, 66, 66, 0.5);
-    }
-
-    .nav-link.dados:hover {
-        text-decoration: underline;
-    }
-
-    .card.endereco {
-        box-shadow: 1px 1px 5px 0rem rgba(66, 66, 66, 0.5);
-        background-color: var(--claro);
-    }
-
-    .card-img-top {
-        height: 135px;
-        /* altura fixa menor */
-        object-fit: contain;
-        /* corta a imagem para caber sem distorcer */
-    }
-
-    footer {
-        width: 100%;
-        background-color: var(--escuro);
-
-    }
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --escuro: hsl(130, 100%, 16%);
-        --medio: hsl(130, 96%, 20%);
-        --claro: hsl(130, 92%, 5%);
+#fundo-banner {
+    background-color: var(--verde-ifg);
+}
 
-        --cor-texto: #cccccc;
-        --verde-ifg: #2f9e41;
-    }
+.dropdown-item:active {
+    background-color: var(--verde-ifg);
+}
+
+.navbar {
+    background-color: var(--escuro) !important;
+    box-shadow: 0 0 5px 0.25rem rgba(66, 66, 66, 0.5);
+}
+
+.card {
+    background-color: var(--medio);
+    box-shadow: 2px 3px 6px 0.1rem rgba(66, 66, 66, 0.5);
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.25rem var(--escuro);
+    border-color: var(--verde-ifg);
+}
+
+.nav-link.dados {
+    color: var(--cor-texto);
+    background-color: hsl(130, 54%, 85%);
+    position: relative;
+    z-index: 100;
+    border: 0;
+}
+
+.nav-link.dados.active {
+    background-color: var(--medio);
+    border-color: rgba(66, 66, 66, 0.5);
+}
+
+.nav-link.dados:hover {
+    text-decoration: underline;
+}
+
+.card.endereco {
+    box-shadow: 1px 1px 5px 0rem rgba(66, 66, 66, 0.5);
+    background-color: var(--claro);
+}
+
+.card-img-top {
+    height: 135px;
+    /* altura fixa menor */
+    object-fit: contain;
+    /* corta a imagem para caber sem distorcer */
+}
+
+footer {
+    width: 100%;
+    background-color: var(--escuro);
+
+}
+
+
+[data-bs-theme="dark"] {
+    --escuro: hsl(130, 100%, 7%);
+    --medio: hsl(130, 96%, 10%);
+    --claro: hsl(130, 92%, 5%);
+    --cor-texto: #007413;
+
+    --bs-body-color: var(--verde-ifg);
+    --bs-dark-rgb: var(--cor-texto);
+    --bs-body-bg: var(--claro);
 
     .nav-link {
         color: var(--cor-texto);
@@ -132,8 +133,17 @@
         color: var(--cor-texto);
     }
 
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
         border-color: transparent;
+    }
+
+    .navbar {
+        box-shadow: none !important;
+    }
+
+    .card {
+        box-shadow: none !important;
     }
 
     input[type=number] {
@@ -142,5 +152,13 @@
         border-radius: 5px;
         border: 0px;
         padding: 5px;
+    }
+
+    #buscarProduto::placeholder {
+        color: var(--cor-texto);
+    }
+
+    img {
+        filter: brightness(70%);
     }
 }

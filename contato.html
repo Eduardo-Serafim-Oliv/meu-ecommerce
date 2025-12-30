@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="light">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/carregarTema.js"></script>
 </head>
 
 <body>
@@ -52,6 +53,10 @@
                                 </li>
                                 <li><a class="dropdown-item" href="meus_dados.html">Meus Dados</a></li>
                                 <li><a class="dropdown-item" href="meus_pedidos.html">Meus Pedidos</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><button id="tema" class="dropdown-item"></button></li>
                             </ul>
                         </li>
                     </ul>
@@ -101,8 +106,8 @@
 
                         Mensagem:
                         <div class="form-floating mb-3 mt-1">
-                            <textarea class="form-control" required placeholder="Leave a comment here" id="floatingTextarea2"
-                                style="height: 100px"></textarea>
+                            <textarea class="form-control" required placeholder="Leave a comment here"
+                                id="floatingTextarea2" style="height: 100px"></textarea>
                             <label for="floatingTextarea2">Digite aqui: </label>
                             <div class="invalid-feedback">
                                 A mensagem não pode ser vazia
@@ -138,6 +143,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/contato.js"></script>
+    <script src="js/alternarTema.js"></script>
 </body>
 
 </html>
