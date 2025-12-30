@@ -162,6 +162,8 @@ const divFrete = document.getElementById("fretes");
 const botaoFinalizarPedido = document.getElementById("finalizarPedido");
 let precoFreteSelecionado = 0;
 
+let freteSelecionado = [];
+
 function addRadioFrete(f, id) {
 
     const frete = document.createElement("div");
@@ -175,7 +177,8 @@ function addRadioFrete(f, id) {
 
     frete.querySelector("input").addEventListener("click", function () {
         botaoFinalizarPedido.style.display = "block";
-        precoFreteSelecionado = opcoesFrete[parseInt(this.id.charAt(5))].valor;
+        precoFreteSelecionado = opcoesFrete[id].valor;
+        freteSelecionado = opcoesFrete[id];
         atualizarTotal();
     });
 
@@ -183,8 +186,22 @@ function addRadioFrete(f, id) {
 }
 
 function atualizarTotal() {
-    if(precoFreteSelecionado != 0) {
+    if (precoFreteSelecionado != 0) {
         document.getElementById("total").textContent = `Total: R$ ${(precoFreteSelecionado + somaPrecos)
             .toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 }
+
+botaoFinalizarPedido.addEventListener("click", (e) => {
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    pedidos.push({
+        produtos: carrinho,
+        frete: freteSelecionado
+    });
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+    localStorage.setItem("carrinho", null);
+    
+    location.href = "sucesso-pedido.html";
+});
