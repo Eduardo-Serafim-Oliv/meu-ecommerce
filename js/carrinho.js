@@ -97,15 +97,94 @@ function salvarCarrinho() {
     localStorage.setItem("carrinho", JSON.stringify(carrinhoSemDetalhes));
 }
 
+let somaPrecos = 0;
+
 function atualizarResumoPedido() {
     const resumoPedido = document.getElementById("resumo-pedido");
     resumoPedido.style.display = carrinho.length > 0 ? "block" : "none";
 
-    const somaPrecos = carrinho.reduce((somaPrecos, item) => somaPrecos + (item.price * item.qtd), 0);
+    somaPrecos = carrinho.reduce((somaPrecos, item) => somaPrecos + (item.price * item.qtd), 0);
 
-    const total = document.getElementById("total");
-    const parcelar = document.getElementById("parcelar");
+    const subtotal = document.getElementById("subtotal");
 
-    total.innerHTML = `Total (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-    parcelar.innerHTML = `Em até 10x s/juros<br>10x de ${(somaPrecos / 10).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    subtotal.innerHTML = `Subtotal (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    atualizarTotal();
+}
+
+const formCep = document.querySelector(".needs-validation");
+let opcoesFrete = [];
+
+document.getElementById("calcularFrete").addEventListener("click", async () => {
+    botaoFinalizarPedido.style.display = "none";
+    const cep = document.getElementById("cep");
+    if (cep.value.match(/[0-9]{5}-[0-9]{3}/g)) {
+        cep.classList.add("is-valid");
+        cep.classList.remove("is-invalid");
+
+        try {
+            const response = await fetch("https://ppw-1-tads.vercel.app/api/frete", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: `{"cep":"${cep.value}"}`
+            });
+
+            if (response.status === 400) {
+                cep.classList.remove("is-valid");
+                cep.classList.add("is-invalid");
+            } else if (!response.ok) {
+                throw new Error(`erro http - ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            divFrete.innerHTML = "";
+
+            opcoesFrete = data.fretes;
+
+            for (let i = 0; i < opcoesFrete.length; i++) {
+                addRadioFrete(opcoesFrete[i], i);
+            }
+        } catch (error) {
+            console.error("Falha ao calcular frete: " + error.message);
+        }
+    } else {
+        cep.classList.remove("is-valid");
+        cep.classList.add("is-invalid");
+        fretes.innerHTML = "";
+        document.getElementById("total").textContent = "";
+        precoFreteSelecionado = 0;
+    }
+});
+
+const divFrete = document.getElementById("fretes");
+const botaoFinalizarPedido = document.getElementById("finalizarPedido");
+let precoFreteSelecionado = 0;
+
+function addRadioFrete(f, id) {
+
+    const frete = document.createElement("div");
+    frete.classList.add("form-check");
+    frete.innerHTML = `
+        <input class="form-check-input" type="radio" name="frete" id="frete${id}">
+        <label class="form-check-label" for="frete${id}">
+            ${f.servico} <br> <p class="fw-light">R$ ${f.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${f.prazo})</p>
+        </label>
+    `;
+
+    frete.querySelector("input").addEventListener("click", function () {
+        botaoFinalizarPedido.style.display = "block";
+        precoFreteSelecionado = opcoesFrete[parseInt(this.id.charAt(5))].valor;
+        atualizarTotal();
+    });
+
+    divFrete.appendChild(frete);
+}
+
+function atualizarTotal() {
+    if(precoFreteSelecionado != 0) {
+        document.getElementById("total").textContent = `Total: R$ ${(precoFreteSelecionado + somaPrecos)
+            .toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
 }

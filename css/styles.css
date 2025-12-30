@@ -13,6 +13,11 @@
     box-shadow: 0px 0px 3.5px black;
 }
 
+.form-check-input:checked {
+    background-color: var(--verde-ifg);
+    border-color: var(--escuro);
+}
+
 @media (min-width: 992px) {
     .navbar-menu {
         position: absolute;

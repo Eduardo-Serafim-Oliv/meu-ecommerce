@@ -63,13 +63,31 @@
     <div class="container p-4 mt-1 min-vh-100">
         <div class="row">
             <div id="produtos" class="col-md-12 col-lg-8"></div>
-            <div style="display: none;" id="resumo-pedido" class="col-lg-4 col-xl-3 col-md-12 align-self-center sticky-bottom z-1">
+            <div style="display: none;" id="resumo-pedido"
+                class="col-lg-4 col-xl-3 col-md-12 align-self-center sticky-bottom z-1">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Resumo do Pedido</h3>
-                        <p id="total" class="card-text fw-medium">Total (6 produtos):<br>R$ 95,00</p>
-                        <p id="parcelar" class="card-text fw-light">Em até 10x s/juros<br>10x de 9,50</p>
-                        <a class="btn btn-success" href="sucesso-pedido.html">Finalizar Pedido</a>
+                        <p id="subtotal" class="card-text fw-medium">Subtotal (6 produtos):<br>R$ 95,00</p>
+                        <p class="card-text" style="margin-bottom: 1px;">Calcular frete:</p>
+                        <div class="row g-2 mb-3">
+                            <div class="form-floating col-md-10">
+                                <input type="text" class="form-control" id="cep" pattern="[0-9]{5}-[0-9]{3}"
+                                    maxlength="9">
+                                <label for="cep">CEP</label>
+                                <div class="invalid-feedback">
+                                    CEP inválido. Formato esperado: 99999-999
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="calcularFrete" class="btn btn-outline-success h-100" type="button"><i
+                                        class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                        <div id="fretes"></div>
+                        <p id="total"></p>
+                        <a id="finalizarPedido" class="btn btn-success" style="display: none;" href="sucesso-pedido.html">Finalizar
+                            Pedido</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +104,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" data-action="remover" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-cart-x"></i> Remover</button>
+                        <button type="button" data-action="remover" class="btn btn-danger" data-bs-dismiss="modal"><i
+                                class="bi bi-cart-x"></i> Remover</button>
                     </div>
                 </div>
             </div>
