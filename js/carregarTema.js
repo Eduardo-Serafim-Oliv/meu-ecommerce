@@ -1,4 +1,32 @@
-const tema = localStorage.getItem("tema") || window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+let tema = localStorage.getItem("tema");
+
+if (tema === "auto" || tema === null) {
+    tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
 document.documentElement.setAttribute("data-bs-theme", tema);
-localStorage.setItem("tema", tema);
+
+document.addEventListener("DOMContentLoaded", (event) => {
+    const select = document.getElementById("tema");
+
+    carregarTema();
+
+    select.addEventListener("change", () => {
+
+        localStorage.setItem("tema", select.value);
+        carregarTema();
+    });
+
+    function carregarTema() {
+        let tema = localStorage.getItem("tema");
+        select.value = tema;
+
+        if (tema == "auto") {
+            tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+
+        document.documentElement.setAttribute("data-bs-theme", tema);
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { carregarTema(); });
+});
