@@ -3,12 +3,40 @@ const container = document.getElementById("products");
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-fetch("https://ppw-1-tads.vercel.app/api/products")
-    .then(res => res.json())
-    .then(data => {
-        container.innerHTML = "";
-        data.products.forEach(p => adicionarCardProduto(p));
-    });
+let products = [];
+
+async function fetchProdutos() {
+    try {
+        const response = await fetch("https://ppw-1-tads.vercel.app/api/products");
+        if(!response.ok) {
+            throw new Error(`erro http - ${response.status}`);
+        }
+        const data = await response.json();
+        products = data.products;
+    } catch (error) {
+        console.error("Não foi possível consultar os produtos: ", error.message);
+    } finally {
+        carregarProdutos("");
+    }
+}
+
+fetchProdutos();
+
+document.getElementById("buscarProduto").addEventListener("keyup", function () {
+    carregarProdutos(this.value);
+});
+
+function carregarProdutos(busca) {
+    busca = busca.toLowerCase();
+    produtosFiltrados = products.filter(p => p.name.toLowerCase().match(busca));
+
+    if(produtosFiltrados.length == 0) {
+        container.innerHTML = `<div class="display-3 w-100">Nenhum produto encontrado.</div>`;
+        return;
+    }
+    container.innerHTML = "";
+    produtosFiltrados.forEach(p => adicionarCardProduto(p));
+}
 
 function adicionarCardProduto(p) {
     const col = document.createElement("div");
