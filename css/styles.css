@@ -17,6 +17,11 @@
         position: absolute;
         right: 1em;
     }
+
+    #liBusca {
+        position: fixed;
+        left: 66%;
+    }
 }
 
 [data-bs-theme="light"] {
@@ -89,6 +94,12 @@ footer {
     width: 100%;
     background-color: var(--escuro);
 
+}
+
+#tema {
+    font-size: 15px;
+    width: 90%;
+    margin: auto;
 }
 
 

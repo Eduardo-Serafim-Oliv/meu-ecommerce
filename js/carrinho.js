@@ -107,56 +107,61 @@ function atualizarResumoPedido() {
 
     const subtotal = document.getElementById("subtotal");
 
-    subtotal.innerHTML = `Subtotal (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    subtotal.innerHTML = `Subtotal (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     atualizarTotal();
 }
 
+const total = document.getElementById("total");
 const formCep = document.querySelector(".needs-validation");
+const cep = document.getElementById("cep");
 let opcoesFrete = [];
 
-document.getElementById("calcularFrete").addEventListener("click", async () => {
+document.getElementById("calcularFrete").addEventListener("click", () => {
     botaoFinalizarPedido.style.display = "none";
-    const cep = document.getElementById("cep");
     if (cep.value.match(/[0-9]{5}-[0-9]{3}/g)) {
         cep.classList.add("is-valid");
         cep.classList.remove("is-invalid");
 
-        try {
-            const response = await fetch("https://ppw-1-tads.vercel.app/api/frete", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: `{"cep":"${cep.value}"}`
-            });
-
-            if (response.status === 400) {
-                cep.classList.remove("is-valid");
-                cep.classList.add("is-invalid");
-            } else if (!response.ok) {
-                throw new Error(`erro http - ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            divFrete.innerHTML = "";
-
-            opcoesFrete = data.fretes;
-
-            for (let i = 0; i < opcoesFrete.length; i++) {
-                addRadioFrete(opcoesFrete[i], i);
-            }
-        } catch (error) {
-            console.error("Falha ao calcular frete: " + error.message);
-        }
+        listarFretes(cep.value);
     } else {
         cep.classList.remove("is-valid");
         cep.classList.add("is-invalid");
         fretes.innerHTML = "";
-        document.getElementById("total").textContent = "";
+        total.textContent = "";
         precoFreteSelecionado = 0;
     }
 });
+
+async function listarFretes(cep) {
+    try {
+        const response = await fetch("https://ppw-1-tads.vercel.app/api/frete", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: `{"cep":"${cep}"}`
+        });
+
+        if (response.status === 400) {
+            cep.classList.remove("is-valid");
+            cep.classList.add("is-invalid");
+        } else if (!response.ok) {
+            throw new Error(`erro http - ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        divFrete.innerHTML = "";
+
+        opcoesFrete = data.fretes;
+
+        for (let i = 0; i < opcoesFrete.length; i++) {
+            addRadioFrete(opcoesFrete[i], i);
+        }
+    } catch (error) {
+        console.error("Falha ao calcular frete: " + error.message);
+    }
+}
 
 const divFrete = document.getElementById("fretes");
 const botaoFinalizarPedido = document.getElementById("finalizarPedido");
@@ -193,15 +198,79 @@ function atualizarTotal() {
 }
 
 botaoFinalizarPedido.addEventListener("click", (e) => {
-    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-    pedidos.push({
+    const produtoParaSalvar = {
+        data: Date.now(),
         produtos: carrinho,
-        frete: freteSelecionado
+        frete: freteSelecionado,
+        endereco: null
+    }
+
+    if (enderecos.length > 0) {
+        let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+        produtoParaSalvar.endereco = enderecoSelecionado;
+        pedidos.push(produtoParaSalvar);
+
+        localStorage.setItem("pedidos", JSON.stringify(pedidos));
+        localStorage.setItem("carrinho", null);
+
+        location.href = "sucesso-pedido.html";
+    } else {
+        sessionStorage.setItem("pedidoSemEndereco", JSON.stringify(produtoParaSalvar));
+        location.href = "enderecos.html?redirect=carrinho&cep=" + cep.value;
+    }
+});
+
+const enderecos = JSON.parse(localStorage.getItem("enderecos")) || [];
+const labelFreteOuEnderecos = document.getElementById("labelFreteOuEnderecos");
+const divConsultaFrete = document.getElementById("divConsultaFrete");
+let enderecoSelecionado = null;
+
+if (enderecos.length > 0) {
+    labelFreteOuEnderecos.textContent = "Endereço de entrega:";
+
+    divConsultaFrete.innerHTML = `
+    <select class="form-select" name="endereco" aria-label="endereço de entrega">
+    <option value="-" selected>Selecione</option>
+    </select>
+    `;
+    const select = divConsultaFrete.querySelector("select");
+
+    enderecos.forEach(e => {
+        const opt = document.createElement("option");
+        opt.textContent = `Nº${e.numero} R${e.rua} ${e.cidade}/${e.estado}`;
+        opt.value = enderecos.indexOf(e);
+        select.append(opt);
     });
 
-    localStorage.setItem("pedidos", JSON.stringify(pedidos));
-    localStorage.setItem("carrinho", null);
-    
-    location.href = "sucesso-pedido.html";
-});
+    const opt = document.createElement("option");
+    opt.textContent = "+ Novo endereço";
+    opt.value = "+";
+    select.append(opt);
+
+    select.addEventListener("change", () => {
+        if (select.value === "+") {
+            location.href = "enderecos.html?redirect=carrinho";
+        } else if (select.value === "-") {
+            divFrete.innerHTML = ``;
+            botaoFinalizarPedido.style.display = "none";
+            total.textContent = "";
+        } else {
+            listarFretes(enderecos[select.value].cep);
+            enderecoSelecionado = enderecos[select.value];
+        }
+    });
+
+    const enderecoNaUrl = parseInt(new URLSearchParams(window.location.search).get("endereco")) - 1;
+
+    const toast = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[0]);
+
+    if (enderecoNaUrl > 0 || enderecoNaUrl < enderecos.length || !Number.isNaN(enderecoNaUrl)) {
+        enderecoSelecionado = enderecos[enderecoNaUrl];
+        listarFretes(enderecos[enderecoNaUrl].cep);
+        select.value = enderecoNaUrl;
+        botaoFinalizarPedido.display = "block";
+        toast.show();
+    }
+}

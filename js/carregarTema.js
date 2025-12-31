@@ -1,6 +1,11 @@
 let tema = localStorage.getItem("tema");
 
-if (tema === "auto" || tema === null) {
+if(tema === null) {
+    tema = "auto";
+    localStorage.setItem("tema", tema);
+}
+
+if (tema === "auto") {
     tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
@@ -21,7 +26,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let tema = localStorage.getItem("tema");
         select.value = tema;
 
-        if (tema == "auto") {
+        if (tema === "auto") {
             tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
         }
 
