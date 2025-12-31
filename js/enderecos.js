@@ -1,11 +1,16 @@
 const container = document.getElementById("lista-enderecos");
 const form = document.querySelector("form");
-const toastCadastrado = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[0]);
-const toastExcluido = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[1]);
+const toastFinalizar = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[0])
+const toastCadastrado = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[1]);
+const toastExcluido = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[2]);
 const elementoModal = document.getElementById('cadastrarEndereco'); 
-const modal = bootstrap.Modal.getOrCreateInstance(elementoModal); 
+const modal = bootstrap.Modal.getOrCreateInstance(elementoModal);
+const btnToggleModalCadastrarEndereco = document.getElementById("adicionar-endereco");
 
 let enderecos = JSON.parse(localStorage.getItem("enderecos")) || [];
+const redirect = new URLSearchParams(window.location.search).get("redirect");
+const cep = new URLSearchParams(window.location.search).get("cep");
+const modalCarrinho = bootstrap.Modal.getOrCreateInstance(elementoModal);
 
 carregarEnderecos();
 
@@ -65,5 +70,42 @@ document.getElementById("btnCadastrar").addEventListener("click", () => {
         form.classList.remove('was-validated');
         modal.hide();
         toastCadastrado.show();
+
+        if(redirect === "carrinho") {
+            location.href = `carrinho.html?endereco=${enderecos.length}`;
+        }
+
+        if(cep != null) {
+            const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+            const pedidoSemEndereco = JSON.parse(sessionStorage.getItem("pedidoSemEndereco"));
+            pedidoSemEndereco.endereco = endereco;
+            pedidos.push(pedidoSemEndereco);
+            localStorage.setItem("pedidos", JSON.stringify(pedidos));
+            localStorage.setItem("carrinho", null);
+            sessionStorage.setItem("pedidoSemEndereco", null);
+            location.href = "sucesso-pedido.html";
+        }
     }
 });
+
+const modal2 = document.getElementById("avisoEndereco");
+
+if(redirect === "carrinho") {
+    if(cep != null) {
+        document.getElementById("cep").value = cep;
+        toastFinalizar.show();
+        new bootstrap.Modal(modal2).show();
+        modal2.addEventListener("hidden.bs.modal", e => {
+            btnToggleModalCadastrarEndereco.click();
+        });
+        elementoModal.addEventListener("hidden.bs.modal", e=> {
+            toastFinalizar.show();
+            document.getElementById("finalizarNotificacao").addEventListener("click", e => {
+                btnToggleModalCadastrarEndereco.click();
+            });
+        });
+        document.getElementById("btnCadastrar").textContent="Finalizar Compra";
+    } else {
+        btnToggleModalCadastrarEndereco.click();
+    }
+}
