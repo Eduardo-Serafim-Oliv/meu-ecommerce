@@ -91,6 +91,12 @@ footer {
 
 }
 
+#tema {
+    font-size: 15px;
+    width: 90%;
+    margin: auto;
+}
+
 
 [data-bs-theme="dark"] {
     --escuro: hsl(130, 100%, 7%);

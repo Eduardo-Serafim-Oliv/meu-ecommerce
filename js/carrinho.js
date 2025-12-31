@@ -107,7 +107,7 @@ function atualizarResumoPedido() {
 
     const subtotal = document.getElementById("subtotal");
 
-    subtotal.innerHTML = `Subtotal (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    subtotal.innerHTML = `Subtotal (${carrinho.length} ${carrinho.length === 1 ? "produto" : "produtos"}):<br>R$ ${somaPrecos.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2  })}`;
     atualizarTotal();
 }
 
