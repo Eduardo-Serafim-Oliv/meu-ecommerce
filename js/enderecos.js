@@ -109,3 +109,5 @@ if(redirect === "carrinho") {
         btnToggleModalCadastrarEndereco.click();
     }
 }
+
+VMasker(document.getElementById("cep")).maskPattern("99999-999");

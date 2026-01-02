@@ -1,14 +1,8 @@
-(() => {
-    'use strict'
+document.querySelector("form").addEventListener("submit", function (e) {
+    if(!this.checkValidity()) {
+        e.preventDefault();
+        this.classList.add("was-validated");
+    }
+});
 
-    const form = document.querySelector("form");
-
-    form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-    }, false)
-})()
+VMasker(document.getElementById("telefone")).maskPattern("(99) 99999-9999");

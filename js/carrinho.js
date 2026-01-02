@@ -273,4 +273,6 @@ if (enderecos.length > 0) {
         botaoFinalizarPedido.display = "block";
         toast.show();
     }
+} else {
+    VMasker(document.getElementById("cep")).maskPattern("99999-999");
 }
