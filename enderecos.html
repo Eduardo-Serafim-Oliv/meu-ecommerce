@@ -110,29 +110,87 @@
                                 </div>
                             </div>
                             <div class="mb-3 col-md-8 form-floating">
-                                <input type="text" class="form-control" id="estado" required placeholder="GO">
+                                <select class="form-select" id="estado" required>
+                                    <option value="" disabled selected></option>
+
+                                    <optgroup label="Região Norte">
+                                        <option value="AC">Acre</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="TO">Tocantins</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Nordeste">
+                                        <option value="AL">Alagoas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="SE">Sergipe</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Centro-Oeste">
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MT">Mato Grosso</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Sudeste">
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="SP">São Paulo</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Sul">
+                                        <option value="PR">Paraná</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="SC">Santa Catarina</option>
+                                    </optgroup>
+                                </select>
                                 <label for="estado" class="ms-2">Estado:</label>
                                 <div class="invalid-feedback">
                                     Informe um estado
                                 </div>
                             </div>
-                            <div class="mb-3 col-md-12 form-floating">
-                                <input type="text" class="form-control" id="cidade" required placeholder="Formosa">
+                            <div class="mb-3 col-md-5 form-floating">
+                                <input type="text" class="form-control" id="cidade" required placeholder="">
                                 <label for="cidade" class="ms-2">Cidade:</label>
                                 <div class="invalid-feedback">
                                     Informe uma cidade
                                 </div>
                             </div>
-                            <div class="mb-3 col-md-8 form-floating">
-                                <input type="text" class="form-control" id="rua" required placeholder="1">
-                                <label for="rua" class="ms-2">Rua:</label>
+                            <div class="mb-3 col-md-7 form-floating">
+                                <input type="text" class="form-control" id="bairro" required placeholder="">
+                                <label for="bairro" class="ms-2">Bairro:</label>
                                 <div class="invalid-feedback">
-                                    Informe uma rua
+                                    Informe um bairro
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-8 form-floating">
+                                <input type="text" class="form-control" id="logradouro" required placeholder="">
+                                <label for="logradouro" class="ms-2">Logradouro:</label>
+                                <div class="invalid-feedback">
+                                    Informe um logradouro
                                 </div>
                             </div>
                             <div class="mb-3 col-md-4 form-floating">
-                                <input type="text" class="form-control" id="numero" required placeholder="1">
+                                <input type="text" class="form-control" id="numero" required placeholder="">
                                 <label for="numero" class="ms-2">Número:</label>
+                                <div class="invalid-feedback">
+                                    Informe o número
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-12 form-floating">
+                                <input type="text" class="form-control" id="complemento" placeholder="">
+                                <label for="complemento" class="ms-2">Complemento (opcional):</label>
                                 <div class="invalid-feedback">
                                     Informe o número
                                 </div>

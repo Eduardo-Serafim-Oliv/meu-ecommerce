@@ -1,3 +1,5 @@
+document.getElementById("nome").focus();
+
 document.querySelector("form").addEventListener("submit", function (e) {
     if(!this.checkValidity()) {
         e.preventDefault();

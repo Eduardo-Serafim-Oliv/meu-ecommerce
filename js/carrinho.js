@@ -239,7 +239,7 @@ if (enderecos.length > 0) {
 
     enderecos.forEach(e => {
         const opt = document.createElement("option");
-        opt.textContent = `Nº${e.numero} R${e.rua} ${e.cidade}/${e.estado}`;
+        opt.textContent = `Nº${e.numero}, ${e.logradouro}, ${e.bairro}, ${e.cidade}/${e.estado}`;
         opt.value = enderecos.indexOf(e);
         select.append(opt);
     });

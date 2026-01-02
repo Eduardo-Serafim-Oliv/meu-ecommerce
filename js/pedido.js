@@ -41,7 +41,8 @@ if (id > pedidos.length || id <= 0 || Number.isNaN(id)) {
 
     document.getElementById("entrega").innerHTML = `
         <div class="fs-3 mt-5 mb-1">Endereço de entrega:</div>
-        Rua ${pedido.endereco.rua}, Número ${pedido.endereco.numero}, ${pedido.endereco.cidade}/${pedido.endereco.estado} CEP ${pedido.endereco.cep}<br>
+        ${pedido.endereco.logradouro}, Número ${pedido.endereco.numero}, ${pedido.endereco.complemento != "" ? pedido.endereco.complemento : ""}, ${pedido.endereco.bairro} <br>${pedido.endereco.cidade}/${pedido.endereco.estado} ${pedido.endereco.cep}<br>
+        
         <div class="fs-3 mt-2 mb-0">Frete:</div>
         ${pedido.frete.servico}<br>
         R$ ${pedido.frete.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
