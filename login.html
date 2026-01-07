@@ -59,26 +59,83 @@
             </div>
         </nav>
     </header>
+
+
     <div class="container mt-5 min-vh-100">
         <div class="row justify-content-center">
             <div class="col-md-6 col-sm-12">
                 <div class="display-4 text-center mb-2">Entrar</div>
-                <form class="card p-5" action="produtos.html">
+                <form class="card p-5 needs-validation" novalidate>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email" placeholder="seu@email.com">
+                        <input type="text" class="form-control" id="email" placeholder="Email" required>
                         <label for="email">Email</label>
+                        <div class="invalid-feedback">
+                            Por favor, insira um email válido - Ex: seu@email.com
+                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="senha" placeholder="Senha">
+                        <input type="password" class="form-control" id="senha" placeholder="Senha" minlength="5"
+                            required>
                         <label for="senha">Senha</label>
+                        <div class="invalid-feedback">
+                            Por favor, insira uma senha válida. <br> A senha informada possui menos de 5 dígitos.
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Entrar</button>
+                    <button type="button" onclick="realizarLogin(document.getElementById('email').value, document.getElementById('senha').value)" class="btn btn-success">Login</button>
+
                 </form>
             </div>
         </div>
     </div>
 
-    <footer
+
+    <!-- 
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    else {
+                        event.preventDefault()
+                        realizarLogin(document.getElementById('email').value, document.getElementById('senha').value);
+
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+
+    </script> -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header text-bg-danger">
+                <i style="margin-right: 5px;" class="bi bi-exclamation-triangle" class="rounded me-2"></i>
+                <strong class="me-auto">Credenciais inválidas </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="mensagemToastLogin" class="toast-body">
+                <b>Usuário ou senha inválidos.</b>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <footer style="margin-top: 15px;"
         class="container-fluid flex-wrap justify-content-between align-items-center py-3 border-top border-1 border-black">
         <div class="d-flex flex-wrap justify-content-between align-items-center">
             <div class="col-md-6 d-flex align-items-center">
@@ -98,6 +155,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/teste.js"></script>
+
 </body>
 
 </html>

@@ -66,23 +66,26 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 col-sm-12">
                     <div class="display-4 text-center mb-2">Formulário de Contato</div>
-                    <form class="card p-5" action="produtos.html">
+                    <form class="card p-5" action="sucesso-contato.html">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nome" placeholder="seu@email.com">
-                            <label for="nome">Nome Completo</label>
+                            <input required type="text" class="form-control" id="nome" placeholder="seu@email.com">
+                            <label for="nome">Nome Completo:</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="seu@email.com">
-                            <label for="email">Email</label>
+                            <input required type="email" class="form-control" id="email" placeholder="seu@email.com">
+                            <label for="email">Email:</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
+                            <input required type="text" style="height: 100px;" class="form-control" id="telefone" pattern="\(\d{2}\)\s\d{4,5}-\d{4}"
                                 placeholder="(99)99999-99999"
                                 title="Digite no formato (99) 99999-9999, não se esqueça dos espaços e do hífen.">
-                            <label for="telefone">Telefone</label>
+                            <label for="telefone">Telefone: <br>Ex.: (99)99999-99999 </label>
                         </div>
+
+                        <!-- Adicionar obrigatoriedade de selecionar uma opção, no JavaScript -->
                         <div class="form-floating mb-3">
                             <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                <option selected disabled>Selecione uma opção...</option>
                                 <option value="1">Encomendas</option>
                                 <option value="2">Reclamações</option>
                                 <option value="3">Devoluções</option>
@@ -93,13 +96,12 @@
 
                         Mensagem:
                         <div class="form-floating mb-3 mt-1">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                            <textarea required class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                                 style="height: 100px"></textarea>
                             <label for="floatingTextarea2">Digite aqui: </label>
                         </div>
 
-                        <button type="submit" class="btn btn-success"
-                            onclick=" alert('Formulário enviado com sucesso!')">Enviar</button>
+                        <button type="submit" class="btn btn-success">Enviar</button>
                     </form>
                 </div>
             </div>
