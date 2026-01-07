@@ -10,6 +10,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/carregarTema.js"></script>
 </head>
 
 <body>
@@ -52,6 +53,14 @@
                                 </li>
                                 <li><a class="dropdown-item" href="meus_dados.html">Meus Dados</a></li>
                                 <li><a class="dropdown-item" href="meus_pedidos.html">Meus Pedidos</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <select class="form-select" id="tema">
+                                    <option value="auto">&#9681; Automático</option>
+                                    <option value="light">&#9788; Claro</option>
+                                    <option value="dark">&#9790; Escuro</option>
+                                </select>
                             </ul>
                         </li>
                     </ul>
@@ -71,25 +80,172 @@
                             href="enderecos.html">Endereços</a>
                     </li>
                 </ul>
-                <div class="card p-3 gap-3" style="border: 0; border-top-left-radius: 0; box-shadow: none;">
-                    <div class="card endereco">
-                        <div class="card-body">
-                            <div class="card-title"><strong>Endereço #1</strong></div>
-                            <div class="card-text">Rua 1, número 1, Formosa/GO, CEP 73000-000</div>
-                            <button class="btn btn-outline-secondary position-absolute" style="top: 7px; right: 7px;"><i
-                                    class="bi bi-trash-fill"></i></button>
-                        </div>
+                <div id="container-enderecos" class="card p-3"
+                    style="border: 0; border-top-left-radius: 0; box-shadow: none;">
+                    <div id="lista-enderecos">
                     </div>
-                    <div class="card endereco">
-                        <div class="card-body">
-                            <div class="card-title"><strong>Endereço #2</strong></div>
-                            <div class="card-text">Rua 2, número 2, Formosa/GO, CEP 74000-300</div>
-                            <button class="btn btn-outline-secondary position-absolute" style="top: 7px; right: 7px;"><i
-                                    class="bi bi-trash-fill"></i></button>
-                        </div>
-                    </div>
-                    <button class="btn btn-success"><i class="bi bi-plus"></i> Adicionar Endereço</button>
+                    <button id="adicionar-endereco" data-bs-toggle="modal" data-bs-target="#cadastrarEndereco"
+                        class="btn btn-success"><i class="bi bi-plus"></i> Adicionar
+                        Endereço</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cadastrarEndereco" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Endereço</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="needs-validation" novalidate>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="mb-3 col-md-4 form-floating">
+                                <input type="text" class="form-control" id="cep" required pattern="[0-9]{5}-[0-9]{3}"
+                                    placeholder="99999-999" maxlength="9">
+                                <label for="cep" class="ms-2">CEP:</label>
+                                <div class="invalid-feedback">
+                                    Informe um CEP válido
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-8 form-floating">
+                                <select class="form-select" id="estado" required>
+                                    <option value="" disabled selected></option>
+
+                                    <optgroup label="Região Norte">
+                                        <option value="AC">Acre</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="TO">Tocantins</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Nordeste">
+                                        <option value="AL">Alagoas</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="SE">Sergipe</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Centro-Oeste">
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MT">Mato Grosso</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Sudeste">
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="SP">São Paulo</option>
+                                    </optgroup>
+
+                                    <optgroup label="Região Sul">
+                                        <option value="PR">Paraná</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="SC">Santa Catarina</option>
+                                    </optgroup>
+                                </select>
+                                <label for="estado" class="ms-2">Estado:</label>
+                                <div class="invalid-feedback">
+                                    Informe um estado
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-5 form-floating">
+                                <input type="text" class="form-control" id="cidade" required placeholder="">
+                                <label for="cidade" class="ms-2">Cidade:</label>
+                                <div class="invalid-feedback">
+                                    Informe uma cidade
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-7 form-floating">
+                                <input type="text" class="form-control" id="bairro" required placeholder="">
+                                <label for="bairro" class="ms-2">Bairro:</label>
+                                <div class="invalid-feedback">
+                                    Informe um bairro
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-8 form-floating">
+                                <input type="text" class="form-control" id="logradouro" required placeholder="">
+                                <label for="logradouro" class="ms-2">Logradouro:</label>
+                                <div class="invalid-feedback">
+                                    Informe um logradouro
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-4 form-floating">
+                                <input type="text" class="form-control" id="numero" required placeholder="">
+                                <label for="numero" class="ms-2">Número:</label>
+                                <div class="invalid-feedback">
+                                    Informe o número
+                                </div>
+                            </div>
+                            <div class="mb-3 col-md-12 form-floating">
+                                <input type="text" class="form-control" id="complemento" placeholder="">
+                                <label for="complemento" class="ms-2">Complemento (opcional):</label>
+                                <div class="invalid-feedback">
+                                    Informe o número
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnCadastrar" class="btn btn-success">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="avisoEndereco" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Aviso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Antes de finalizar o pedido é necessário informar o endereço de entrega.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-success">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="position-fixed bottom-0 end-0 p-3">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Quase lá!</strong>
+                <small>agora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="finalizarNotificacao" class="toast-body">
+                Informe o endereço para finalizar o pedido.
+            </div>
+        </div>
+    </div>
+    <div class="position-fixed bottom-0 end-0 p-3">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <i class="bi bi-check-square"></i> Endereço cadastrado!
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <div class="position-fixed bottom-0 end-0 p-3">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+                <i class="bi bi-trash3-fill"></i> Endereço excluído!
+                <button type="button" class="btn-close ms-5" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -114,6 +270,13 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vanilla-masker@1.1.1/build/vanilla-masker.min.js"></script>
+    <script src="js/enderecos.js"></script>
 </body>
+<style>
+    #finalizarNotificacao:hover {
+        cursor: pointer;
+    }
+</style>
 
 </html>
