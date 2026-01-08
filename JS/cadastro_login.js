@@ -17,13 +17,13 @@ function realizarLogin(email, senha) {
             if (respostaPost.success === false) {
 
                 console.log(respostaPost);
-                
-                if (respostaPost.message === "Credenciais inválidas"){
+
+                if (respostaPost.message === "Credenciais inválidas") {
 
                     document.getElementById('mensagemToastLogin').innerHTML = `<b> Usuário ou senha inválidos. <b>`;
-                    
+
                 } else {
-                    
+
                     document.getElementById('mensagemToastLogin').innerHTML = `<b> ${respostaPost.message}. <b>`;
 
                 }
@@ -35,12 +35,13 @@ function realizarLogin(email, senha) {
 
             } else {
 
-                console.log(respostaPost);
+                    localStorage.setItem('nome', respostaPost.user.name);
+                    localStorage.setItem('email', respostaPost.user.email);
 
-                localStorage.setItem('email', respostaPost.user.email);
-                localStorage.setItem('nome', respostaPost.user.name);
+                    window.location.replace("index.html");
+                
 
-                 window.location.replace("index.html")
+
             }
         });
 }
