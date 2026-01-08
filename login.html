@@ -10,6 +10,7 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/carregarTema.js"></script>
 </head>
 
 <body>
@@ -36,22 +37,18 @@
                             <a class="nav-link" href="contato.html">Contato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="carrinho.html">Carrinho</a>
+                            <a class="nav-link" href="carrinho.html">
+                                Carrinho
+                                <span id="badge" class="position-relative top-0 translate-middle badge rounded-pill bg-danger" style="visibility: hidden; left: 12%;">99+</span>
+                            </a>
                         </li>
                         <li class="nav-item dropdown navbar-menu">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle" id="localDoNome" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <img src="img/user.png" alt="Ícone de usuário">
-                                Olá, Pessoa
+                                Olá, Visitante
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="novo_usuario.html">Cadastrar</a></li>
-                                <li><a class="dropdown-item" href="login.html">Entrar</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="meus_dados.html">Meus Dados</a></li>
-                                <li><a class="dropdown-item" href="meus_pedidos.html">Meus Pedidos</a></li>
+                            <ul id="lista-dropdown-menu" class="dropdown-menu dropdown-menu-end">
                             </ul>
                         </li>
                     </ul>
@@ -69,17 +66,10 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="email" placeholder="Email" required>
                         <label for="email">Email</label>
-                        <div class="invalid-feedback">
-                            Por favor, insira um email válido - Ex: seu@email.com
-                        </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="senha" placeholder="Senha" minlength="5"
-                            required>
+                        <input type="password" class="form-control" id="senha" placeholder="Senha" required>
                         <label for="senha">Senha</label>
-                        <div class="invalid-feedback">
-                            Por favor, insira uma senha válida. <br> A senha informada possui menos de 5 dígitos.
-                        </div>
                     </div>
                     <button type="button" onclick="realizarLogin(document.getElementById('email').value, document.getElementById('senha').value)" class="btn btn-success">Login</button>
 
@@ -154,9 +144,16 @@
         </div>
     </footer>
 
+    <script src="js/cabecalho.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="JS/teste.js"></script>
+    <script src="js/cadastro_login.js"></script>
+    <script>
+        document.getElementById("email").focus();
 
+        document.querySelector(".btn-success").addEventListener("click", () => {
+            document.querySelector("form").classList.add("was-validated");
+        })
+    </script>
 </body>
 
 </html>

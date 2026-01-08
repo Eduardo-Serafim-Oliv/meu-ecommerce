@@ -206,6 +206,11 @@ botaoFinalizarPedido.addEventListener("click", (e) => {
         endereco: null
     }
 
+    if(email == null) {
+        new bootstrap.Modal(document.getElementById("avisoVisitante")).show();
+        return;
+    }
+
     if (enderecos.length > 0) {
         let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 

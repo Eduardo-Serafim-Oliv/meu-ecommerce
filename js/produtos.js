@@ -1,3 +1,4 @@
+const toast = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[0]);
 const container = document.getElementById("products");
 
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
@@ -8,7 +9,7 @@ let products = [];
 async function fetchProdutos() {
     try {
         const response = await fetch("https://ppw-1-tads.vercel.app/api/products");
-        if(!response.ok) {
+        if (!response.ok) {
             throw new Error(`erro http - ${response.status}`);
         }
         const data = await response.json();
@@ -23,14 +24,14 @@ async function fetchProdutos() {
 fetchProdutos();
 
 document.getElementById("buscarProduto").addEventListener("keyup", function () {
-    carregarProdutos(this.value);
+    carregarProdutos(this.value.trim());
 });
 
 function carregarProdutos(busca) {
     busca = busca.toLowerCase();
     produtosFiltrados = products.filter(p => p.name.toLowerCase().match(busca));
 
-    if(produtosFiltrados.length == 0) {
+    if (produtosFiltrados.length == 0) {
         container.innerHTML = `<div class="display-3 w-100">Nenhum produto encontrado.</div>`;
         return;
     }
@@ -43,14 +44,19 @@ function adicionarCardProduto(p) {
 
     let iconeFavorito = "bi-heart";
 
-    if(favoritos.includes(p.id)) {
+    if (favoritos.includes(p.id)) {
         iconeFavorito = "bi-heart-fill";
     };
 
     let htmlBotaoAddCarrinho = `<i class="bi bi-cart-plus me-2"></i>Adicionar`;
 
-    if(carrinho.map(e => e.id).includes(p.id)) {
+    if (carrinho.map(e => e.id).includes(p.id)) {
         htmlBotaoAddCarrinho = `<i class="bi bi-cart-check me-2"></i>No carrinho`;
+        
+        let produtoNoCarrinho = carrinho.find(e => e.id == p.id);
+        if(produtoNoCarrinho.qtd > 1) {
+            htmlBotaoAddCarrinho = htmlBotaoAddCarrinho + ` (x${produtoNoCarrinho.qtd})`;
+        }
     }
 
     col.innerHTML = `
@@ -58,7 +64,7 @@ function adicionarCardProduto(p) {
         <input type="hidden" name="id" value="${p.id}">
         
         <div style="height: 200px; overflow: hidden;">
-            <img src="${p.image}" class="card-img-top w-100 h-100" style="object-fit: cover" alt="${p.name}">
+            <img src="${p.image}" data-id="${p.id}" class="card-img-top w-100 h-100" style="object-fit: cover" alt="${p.name}">
         </div>
 
         <div class="card-body d-flex flex-column">
@@ -82,26 +88,11 @@ function adicionarCardProduto(p) {
         </div>
     </div>`;
 
-    const toast = bootstrap.Toast.getOrCreateInstance(document.getElementsByClassName("toast")[0]);
 
     col.querySelectorAll("button")[0].addEventListener("click", function () {
         const id = parseInt(col.querySelector("input").value);
 
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-        result = carrinho.find(p => p.id === id);
-
-        if (result) {
-            result.qtd++;
-        } else {
-            carrinho.push({ id: parseInt(id), qtd: 1 });
-        }
-
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-        this.innerHTML = `<i class="bi bi-cart-check me-2"></i>No carrinho`;
-
-        toast.show();
+        adicionarAoCarrinho(id);
     });
 
     col.querySelectorAll("button")[1].addEventListener("click", function () {
@@ -121,3 +112,47 @@ function adicionarCardProduto(p) {
 
     container.appendChild(col);
 }
+
+function adicionarAoCarrinho(id) {
+    carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    result = carrinho.find(p => p.id === id);
+
+    if (result) {
+        result.qtd++;
+    } else {
+        carrinho.push({ id: id, qtd: 1 });
+    }
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    const inputs = container.querySelectorAll('input[name="id"]');
+    const nodeArray = [...inputs];
+    let btnAddCarrinho = nodeArray.filter(e => e.value == id)[0].parentElement.querySelector(".btn-success");
+
+    let msgBotao = `<i class="bi bi-cart-check me-2"></i>`;
+    let produtoNoCarrinho = carrinho.find(e => e.id == id);
+    btnAddCarrinho.innerHTML = produtoNoCarrinho.qtd > 1 ? msgBotao + `No carrinho (x${produtoNoCarrinho.qtd})` : msgBotao + "No carrinho"; 
+
+    toast.show();
+
+    document.getElementById("badge").textContent = carrinho.length;
+    document.getElementById("badge").style.visibility = "visible";
+}
+
+let elementoArrastado = null
+
+container.addEventListener("dragstart", (e) => {
+    elementoArrastado = e.target.nodeName === "IMG" ? e.target : null;
+});
+
+document.querySelector("header").addEventListener("dragover", (e) => {
+    e.preventDefault();
+});
+
+document.querySelector("header").addEventListener("drop", (e) => {
+    e.preventDefault();
+    if (elementoArrastado != null) {
+        adicionarAoCarrinho(parseInt(elementoArrastado.getAttribute("data-id")));
+    }
+});

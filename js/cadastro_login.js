@@ -16,7 +16,7 @@ function realizarLogin(email, senha) {
 
             if (respostaPost.success === false) {
 
-                console.log(respostaPost);
+                // console.log(respostaPost);
 
                 if (respostaPost.message === "Credenciais inválidas") {
 
@@ -63,11 +63,11 @@ function realizarCadastro(nome, email, senha, confirmacaoSenha) {
         .then((response) => response.json())
         .then(respostaPost => {
 
-            console.log(respostaPost);
+            // console.log(respostaPost);
 
             if (respostaPost.sucesso === false) {
 
-                console.log(respostaPost);
+                // console.log(respostaPost);
 
                 if (respostaPost.erro === "Todos os campos são obrigatórios.") {
 

@@ -7,4 +7,10 @@ document.querySelector("form").addEventListener("submit", function (e) {
     }
 });
 
+let emailSalvo = localStorage.getItem("email");
+
+if(emailSalvo != null) {
+    document.getElementById("email").value = emailSalvo;
+}
+
 VMasker(document.getElementById("telefone")).maskPattern("(99) 99999-9999");

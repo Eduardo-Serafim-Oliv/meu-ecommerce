@@ -1,15 +1,13 @@
 let email = localStorage.getItem("email");
 let nome = localStorage.getItem("nome");
 
-
-console.log("Email: " + email);
-console.log("Nome: " +nome);
-
 if (!email) {
 
     let itens = `<li><a class="dropdown-item" href="novo_usuario.html">Cadastrar</a></li>
     <li><a class="dropdown-item" href="login.html">Entrar</a></li>
-    
+    <li>
+        <hr class="dropdown-divider">
+    </li>
     <select class="form-select" id="tema">
         <option value="auto">&#9681; Automático</option>
         <option value="light">&#9788; Claro</option>
@@ -33,13 +31,15 @@ if (!email) {
     <li>
         <hr class="dropdown-divider">
     </li>
-    <li><a onclick="sair()" class="dropdown-item">Sair</a></li>
     <select class="form-select" id="tema">
-        <option value="auto">&#9681; Automático</option>
-        <option value="light">&#9788; Claro</option>
-        <option value="dark">&#9790; Escuro</option>
-    </select>`;
-
+    <option value="auto">&#9681; Automático</option>
+    <option value="light">&#9788; Claro</option>
+    <option value="dark">&#9790; Escuro</option>
+    </select>
+    <li>
+    <hr class="dropdown-divider">
+    </li>
+    <li><a onclick="sair()" class="dropdown-item">Sair</a></li>`;
 }
 
 
@@ -47,4 +47,11 @@ function sair(){
 
     localStorage.clear();
     window.location.replace("index.html")
+}
+
+let arrayCarrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+if(arrayCarrinho.length > 0) {
+    document.getElementById("badge").textContent = arrayCarrinho.length;
+    document.getElementById("badge").style.visibility = "visible";
 }

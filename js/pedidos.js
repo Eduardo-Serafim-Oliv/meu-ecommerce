@@ -16,7 +16,7 @@ function adicionarPedido(p) {
 
     div.innerHTML = `
         <hr>
-        <p class="card-text"><u><b>Pedido #${id}</b></u><br><b>Pedido realizado em:</b> ${new Date(p.data).toLocaleDateString()}
+        <p class="card-text"><u><b>Pedido #${id}</b></u><br><b>Pedido realizado em:</b> ${new Date(p.data).toLocaleDateString("pt-BR")}
             <br><b>Prazo de entrega:</b> ${p.frete.prazo}
             <br><b>Total:</b> R$ ${(somaPrecos + p.frete.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         <p><a href="pedido.html?id=${id}" class="btn btn-success">Visualizar Pedido</a></p>

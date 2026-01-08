@@ -1,5 +1,5 @@
-let email = localStorage.getItem("email");
-let nome = localStorage.getItem("nome");
+let emailSalvo = localStorage.getItem("email");
+let nomeSalvo = localStorage.getItem("nome");
 
 document.getElementById('nomeUsuario').innerHTML = nome;
 document.getElementById('emailUsuario').innerHTML = email;
@@ -12,13 +12,13 @@ function gerarModal() {
 
 }
 
-function alterarDados(nome, email) {
+function alterarDados(nomeSalvo, emailSalvo) {
 
     fetch('https://ppw-1-tads.vercel.app/api/user', {
         method: 'PUT',
         body: JSON.stringify({
-            nome: nome,
-            email: email,
+            nome: nomeSalvo,
+            email: emailSalvo,
         }),
         headers: {
             'Content-type': 'application/json'
@@ -29,7 +29,7 @@ function alterarDados(nome, email) {
 
             if (respostaPut.sucesso === false) {
 
-                console.log(respostaPut);
+                // console.log(respostaPut);
 
                 let toast = document.getElementById('headerDoToast');
 
@@ -72,16 +72,16 @@ function alterarDados(nome, email) {
                 );
                 modal.hide();
 
-                localStorage.setItem('nome', nome);
-                localStorage.setItem('email', email);
+                localStorage.setItem('nome', nomeSalvo);
+                localStorage.setItem('email', emailSalvo);
 
                 const toastLiveExampleCadastro = document.getElementById('liveToast')
 
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExampleCadastro)
                 toastBootstrap.show()
 
-                document.getElementById('nomeUsuario').innerHTML = nome;
-                document.getElementById('emailUsuario').innerHTML = email;
+                document.getElementById('nomeUsuario').innerHTML = nomeSalvo;
+                document.getElementById('emailUsuario').innerHTML = emailSalvo;
 
             }
         });
