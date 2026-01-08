@@ -113,13 +113,3 @@ function realizarCadastro(nome, email, senha, confirmacaoSenha) {
             }
         });
 }
-
-// function guardarDados_e_FecharPagina(nome, email, senha, confirmacaoSenha) {
-
-//     localStorage.setItem('nome', nome);
-//     localStorage.setItem('email', email);
-//     localStorage.setItem('senha', senha);
-//     localStorage.setItem('confirmacaoSenha', confirmacaoSenha);
-
-//     window.location.replace("login.html");
-// };
